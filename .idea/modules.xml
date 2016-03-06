@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/crack.iml" filepath="$PROJECT_DIR$/crack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crackme0201/crackme0201.iml" filepath="$PROJECT_DIR$/crackme0201/crackme0201.iml" />
+    </modules>
+  </component>
+</project>
