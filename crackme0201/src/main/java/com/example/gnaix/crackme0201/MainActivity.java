@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle(R.string.unregister); //未注册
         edit_userName = (EditText) findViewById(R.id.edit_username);
         edit_sn = (EditText) findViewById(R.id.edit_sn);
         btn_register = (Button) findViewById(R.id.button_register);
@@ -30,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!checkSN(edit_userName.getText().toString().trim(),
                         edit_sn.getText().toString().trim())) {
+                    //注册失败
                     Toast.makeText(MainActivity.this,
                             R.string.unsuccessed, Toast.LENGTH_SHORT).show();
                 } else {
+                    //注册成功
                     Toast.makeText(MainActivity.this,
                             R.string.successed, Toast.LENGTH_SHORT).show();
                     btn_register.setEnabled(false);
@@ -43,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 计算用户名和注册码是否匹配
+     * @param userName
+     * @param sn
+     * @return
+     */
     private boolean checkSN(String userName, String sn) {
         try {
             if (userName == null || userName.length() == 0) {
@@ -53,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
+            //MD5对用户名进行hash 最后计算出SN
             MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.reset();
             digest.update(userName.getBytes());
@@ -64,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             String userSN = sb.toString();
-            if(!userSN.equalsIgnoreCase(sn)){
+            if(!userSN.equalsIgnoreCase(sn)){ //比对SN
                 return false;
             }
         } catch (NoSuchAlgorithmException e) {
@@ -74,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * hex 2 String
+     * @param bytes
+     * @param separator
+     * @return
+     */
     private static String toHexString(byte[] bytes, String separator){
         StringBuilder hexString = new StringBuilder();
         for(byte b : bytes){
